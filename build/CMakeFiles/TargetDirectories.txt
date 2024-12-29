@@ -1,0 +1,4 @@
+C:/Users/zziha/Projects/JUNO/build/CMakeFiles/MyGame.dir
+C:/Users/zziha/Projects/JUNO/build/CMakeFiles/INSTALL.dir
+C:/Users/zziha/Projects/JUNO/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/zziha/Projects/JUNO/build/CMakeFiles/ZERO_CHECK.dir
