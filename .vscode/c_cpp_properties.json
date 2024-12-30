@@ -4,8 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/src/**",
-                "${workspaceFolder}/exten/**",
-                "${VULKAN_SDK}/include"
+                "${workspaceFolder}/external/**",
+                "/usr/include/**"
             ],
             "defines": [
             ],

@@ -9,6 +9,7 @@
 #include "shader.hpp"
 #include "mesh.hpp"
 #include "model.hpp"
+#include <memory>
 
 class Scene {
 public:

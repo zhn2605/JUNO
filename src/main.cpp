@@ -8,9 +8,6 @@
 // GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-// irrKlang
-#include <irrKlang.h>
-using namespace irrklang;
 
 // Libraries
 #include "app.hpp"
@@ -28,7 +25,7 @@ Shader* graphicsShader;
 Shader* lightShader;
 Camera camera;
 Scene scene;
-ISoundEngine* SoundEngine = createIrrKlangDevice();
+// ISoundEngine* SoundEngine = createIrrKlangDevice();
 
 void CreateGraphicsPipeline() {
     std::string vertexShaderSource = "./assets/shaders/vert.glsl";
@@ -58,20 +55,20 @@ void InitializeProgram() {
         exit(1);
     }
 
-    if (!SoundEngine) {
-        std::cout << "Failed to create sound engine from irrKlang.\n" << std::endl;
-        exit(1);
-    }
+    // if (!SoundEngine) {
+    //     std::cout << "Failed to create sound engine from irrKlang.\n" << std::endl;
+    //     exit(1);
+    // }
     else {
-        ISound* rain = SoundEngine->play2D("./assets/audio/music/heavy-rain.wav", true, false, true);
-        rain->setVolume(0.1f);
-        rain->setMinDistance(1.0f);
-        rain->setMaxDistance(3.0f);
+        // ISound* rain = SoundEngine->play2D("./assets/audio/music/heavy-rain.wav", true, false, true);
+        // rain->setVolume(0.1f);
+        // rain->setMinDistance(1.0f);
+        // rain->setMaxDistance(3.0f);
 
         glm::vec3 cameraPos = camera.GetEye();
         glm::vec3 lookDir = camera.GetLookDir();
 
-        SoundEngine->setListenerPosition(vec3df(cameraPos.x, cameraPos.y, cameraPos.z), vec3df(lookDir.x, lookDir.y, lookDir.z));
+        // SoundEngine->setListenerPosition(vec3df(cameraPos.x, cameraPos.y, cameraPos.z), vec3df(lookDir.x, lookDir.y, lookDir.z));
     }
 
     // Initialize random seed
@@ -236,7 +233,7 @@ void MainLoop() {
         currentTime += deltaTime;
 
         if (currentTime >= nextSoundTime) {
-            SoundEngine->play2D("./assets/audio/sfx/meow.wav", false);  // false means don't loop the sound
+            // SoundEngine->play2D("./assets/audio/sfx/meow.wav", false);  // false means don't loop the sound
 
             float randomInterval = 1.0f + (rand() % 30);
             nextSoundTime = currentTime + randomInterval;
@@ -247,7 +244,7 @@ void MainLoop() {
         glm::vec3 lookDir = camera.GetLookDir();
 
         // Update sound
-        SoundEngine->setListenerPosition(vec3df(cameraPos.x, cameraPos.y, cameraPos.z), vec3df(lookDir.x, lookDir.y, lookDir.z));
+        // SoundEngine->setListenerPosition(vec3df(cameraPos.x, cameraPos.y, cameraPos.z), vec3df(lookDir.x, lookDir.y, lookDir.z));
 
         Input();
 
@@ -277,7 +274,7 @@ void CleanUp() {
     graphicsShader->deleteProgram();
 
     // Remove sound engine
-    SoundEngine->drop();
+    // SoundEngine->drop();
     
     // Terminate app
     app.Terminate();

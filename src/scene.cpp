@@ -1,4 +1,4 @@
-#include "Scene.hpp"
+#include "scene.hpp"
 
 Scene::Scene() {
     m_shaderProgram = 0;

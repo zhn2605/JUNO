@@ -40,16 +40,10 @@ if(WIN32)
     set(ASSIMP_INCLUDE_DIRS ${ASSIMP_DIR}/include)
     set(ASSIMP_LIBRARY_DIRS ${ASSIMP_DIR}/lib/x64)
 
-    # irrKlang grrr
-    set(IRRKLANG_DIR ${WIN32_LIBS_DIR}/irrKlang-64bit-1.6.0)
-    set(IRRKLANG_INCLUDE_DIRS ${IRRKLANG_DIR}/include)
-    set(IRRKLANG_LIBRARY_DIRS ${IRRKLANG_DIR}/lib/Winx64-visualStudio)
-
 else()
     find_package(SDL2 REQUIRED)
     find_package(SFML 2.6.2 COMPONENTS system window graphics audio REQUIRED)
     find_package(assimp REQUIRED)
-    find_package(irrKlang REQUIRED)
 endif()
 
 # find all source files
@@ -71,6 +65,7 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${EXTERN_LIBS_DIR}/
     # manually add glad again
     ${EXTERN_LIBS_DIR}/glad/include
 )
@@ -81,7 +76,6 @@ target_include_directories(
     ${SDL2_INCLUDE_DIRS}
     ${SFML_INCLUDE_DIRS}
     ${ASSIMP_INCLUDE_DIRS}
-    ${IRRKLANG_INCLUDE_DIRS}
 )
 
 target_link_directories(
@@ -89,15 +83,13 @@ target_link_directories(
     ${SDL2_LIBRARY_DIRS}
     ${SFML_LIBRARY_DIRS}
     ${ASSIMP_LIBRARY_DIRS}
-    ${IRRKLANG_LIBRARY_DIRS}
 )
 
 target_link_libraries(
     ${PROJECT_NAME} PRIVATE
     SDL2main SDL2
     sfml-system sfml-window sfml-graphics sfml-audio
-    assimp-vc143-mt
-    irrKlang
+    assimp
     glm::glm
 )
 
