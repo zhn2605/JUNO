@@ -36,7 +36,6 @@ if(WIN32)
     set(ASSIMP_LIBRARY_DIRS ${ASSIMP_DIR}/lib/x64)
 
     set(ASSIMP_LINK_TARGET assimp-vc143-mt)
-
 else()
     find_package(SDL2 REQUIRED)
     find_package(assimp REQUIRED)

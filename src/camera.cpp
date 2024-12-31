@@ -11,14 +11,14 @@ Camera::Camera() {
     m_lookDirection = glm::vec3(0.0f, 0.0f, -1.0f);
     m_upVector = glm::vec3(0.0f, 1.0f, 0.0f);
 
-    m_fovy = 60.0f;
+    m_fov = 60.0f;
     m_aspect = 1.0f;
     m_near = 0.01f;
     m_far = 50.0f;
 }
 
 void Camera::UpdateAspectRatio(float aspect) {
-    m_projectionMatrix = glm::perspective(m_fovy, aspect, m_near, m_far);
+    m_projectionMatrix = glm::perspective(m_fov, aspect, m_near, m_far);
 }
 
 void Camera::MouseLook(int mouseX, int mouseY) {
@@ -74,7 +74,7 @@ void Camera::MoveDown(float speed) {
 
 // Setters
 void Camera::SetProjectionMatrix(float fovy, float aspect, float near, float far) {
-    m_fovy = fovy;
+    m_fov = fovy;
     m_near = near;
     m_aspect = aspect;
     m_far = far;
@@ -82,7 +82,7 @@ void Camera::SetProjectionMatrix(float fovy, float aspect, float near, float far
 }
 
 void Camera::SetFovy(float fovy) {
-    m_fovy = fovy;
+    m_fov = fovy;
     m_projectionMatrix = glm::perspective(glm::radians(fovy), m_aspect, m_near, m_far);
 }
 
@@ -91,7 +91,7 @@ void Camera::SetEyePosition(glm::vec3 position) {
 }
 
 // Getters
-float Camera::GetFovy() { return m_fovy; }
+float Camera::GetFOV() { return m_fov; }
 
 glm::vec3 Camera::GetEye() { return m_eye; }
 glm::vec3 Camera::GetLookDir() { return m_lookDirection; }

@@ -23,7 +23,7 @@ public:
 	void SetFovy(float fovy);
 	void SetEyePosition(glm::vec3 position);
 
-	float GetFovy();
+	float GetFOV();
 	glm::vec3 GetEye();
 	glm::vec3 GetLookDir();
 	glm::mat4 GetProjectionMatrix() const;
@@ -36,7 +36,7 @@ private:
 	glm::vec3 m_lookDirection;
 	glm::vec3 m_upVector;
 
-	float m_fovy;
+	float m_fov;
 	float m_aspect;
 	float m_near;
 	float m_far;
