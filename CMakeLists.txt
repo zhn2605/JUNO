@@ -40,10 +40,14 @@ if(WIN32)
     set(ASSIMP_INCLUDE_DIRS ${ASSIMP_DIR}/include)
     set(ASSIMP_LIBRARY_DIRS ${ASSIMP_DIR}/lib/x64)
 
+    set(ASSIMP_LINK_TARGET assimp-vc143-mt)
+
 else()
     find_package(SDL2 REQUIRED)
     find_package(SFML 2.6.2 COMPONENTS system window graphics audio REQUIRED)
     find_package(assimp REQUIRED)
+
+    set(ASSIMP_LINK_TARGET assimp)
 endif()
 
 # find all source files
@@ -89,7 +93,7 @@ target_link_libraries(
     ${PROJECT_NAME} PRIVATE
     SDL2main SDL2
     sfml-system sfml-window sfml-graphics sfml-audio
-    assimp
+    ${ASSIMP_LINK_TARGET}
     glm::glm
 )
 
@@ -115,3 +119,37 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     target_compile_definitions(${PROJECT_NAME} PRIVATE _DEBUG)
 endif()
+
+# copy DLLs (windows)
+if(WIN32)
+    # SDL2
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${SDL2_DIR}/lib/x64/SDL2.dll"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    )
+    
+    # SFML
+    file(GLOB SFML_DLLS "${SFML_DIR}/bin/*.dll")
+    foreach(DLL ${SFML_DLLS})
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${DLL}
+            $<TARGET_FILE_DIR:${PROJECT_NAME}>
+        )
+    endforeach()
+    
+    # ASSIMP
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${ASSIMP_DIR}/bin/x64/assimp-vc143-mt.dll"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    )
+endif()
+
+# copy assets folder over
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+    "$<TARGET_FILE_DIR:${PROJECT_NAME}>/assets"
+)
