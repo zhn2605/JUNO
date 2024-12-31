@@ -14,6 +14,8 @@
 #include "camera.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 // Globals
 float currentFrame = 0.0f;

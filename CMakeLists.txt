@@ -30,11 +30,6 @@ if(WIN32)
     set(SDL2_INCLUDE_DIRS ${SDL2_DIR}/include)
     set(SDL2_LIBRARY_DIRS ${SDL2_DIR}/lib/x64)
 
-    # SFML
-    set(SFML_DIR ${WIN32_LIBS_DIR}/SFML-2.6.2)
-    set(SFML_INCLUDE_DIRS ${SFML_DIR}/include)
-    set(SFML_LIBRARY_DIRS ${SFML_DIR}/lib)
-
     # Assimp
     set(ASSIMP_DIR ${WIN32_LIBS_DIR}/Assimp)
     set(ASSIMP_INCLUDE_DIRS ${ASSIMP_DIR}/include)
@@ -44,7 +39,6 @@ if(WIN32)
 
 else()
     find_package(SDL2 REQUIRED)
-    find_package(SFML 2.6.2 COMPONENTS system window graphics audio REQUIRED)
     find_package(assimp REQUIRED)
 
     set(ASSIMP_LINK_TARGET assimp)
@@ -78,21 +72,18 @@ target_include_directories(${PROJECT_NAME}
 target_include_directories(
     ${PROJECT_NAME} PRIVATE
     ${SDL2_INCLUDE_DIRS}
-    ${SFML_INCLUDE_DIRS}
     ${ASSIMP_INCLUDE_DIRS}
 )
 
 target_link_directories(
     ${PROJECT_NAME} PRIVATE
     ${SDL2_LIBRARY_DIRS}
-    ${SFML_LIBRARY_DIRS}
     ${ASSIMP_LIBRARY_DIRS}
 )
 
 target_link_libraries(
     ${PROJECT_NAME} PRIVATE
     SDL2main SDL2
-    sfml-system sfml-window sfml-graphics sfml-audio
     ${ASSIMP_LINK_TARGET}
     glm::glm
 )
@@ -128,16 +119,6 @@ if(WIN32)
         "${SDL2_DIR}/lib/x64/SDL2.dll"
         $<TARGET_FILE_DIR:${PROJECT_NAME}>
     )
-    
-    # SFML
-    file(GLOB SFML_DLLS "${SFML_DIR}/bin/*.dll")
-    foreach(DLL ${SFML_DLLS})
-        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            ${DLL}
-            $<TARGET_FILE_DIR:${PROJECT_NAME}>
-        )
-    endforeach()
     
     # ASSIMP
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
