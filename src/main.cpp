@@ -299,6 +299,49 @@ int main()
     return 0;
 }
 
+int main2() {
+    // Globals
+    float currentFrame = 0.0f;
+    float deltaTime = 0.0f;
+    float lastFrame = 0.0f;;
+
+    App app(640, 480, "myTamagotchi.exe");
+    Shader* graphicsShader;
+    Shader* lightShader;
+    Camera camera;
+    Scene scene;
+
+//==================== Initialize Program ====================
+    // App Initialization
+    app.Initialize();
+
+    // Initialize the Glad Library
+    if (!gladLoadGLLoader(SDL_GL_GetProcAddress)) {
+        std::cout << "Could not initialize glad.\n" << std::endl;
+        exit(1);
+    }
+    else {
+        glm::vec3 cameraPos = camera.GetEye();
+        glm::vec3 lookDir = camera.GetLookDir();
+    }
+
+    // Initialize random seed
+    srand(time(NULL));
+
+//================= Create Graphics Program ==================
+    std::string vertexShaderSource = "./assets/shaders/vert.glsl";
+    std::string fragmentShaderSource = "./assets/shaders/frag.glsl";
+    std::string lightVertexSource = "./assets/shaders/lightvert.glsl";
+    std::string lightFragmentSource = "./assets/shaders/lightfrag.glsl";
+
+    graphicsShader = new Shader(vertexShaderSource, fragmentShaderSource);
+    lightShader = new Shader(lightVertexSource, lightFragmentSource); // TODO: Fix lightshader not working
+    scene.SetShaderProgram(graphicsShader->shaderProgram);
+
+//================== Initialize Models =======================
+    
+}
+
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 

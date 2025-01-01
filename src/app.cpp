@@ -1,10 +1,12 @@
 #include "app.hpp"
 #include <iostream>
 
-App::App() {
-    screenWidth = 0;
-    screenHeight = 0;
-    title = "test";
+App::App(int width, int height, const char* windowTitle) {
+    // Assign settings
+	screenWidth = width;
+	screenHeight = height;
+    title = windowTitle;
+    active = true;
 }
 
 void App::Create(int width, int height, const char* windowTitle) {

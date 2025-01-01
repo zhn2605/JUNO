@@ -7,7 +7,7 @@
 
 class App{
 public:
-	App();
+	App(int width, int height, const char* windowTitle);
 
 	void Create(int width, int height, const char* windowTitle);
 
