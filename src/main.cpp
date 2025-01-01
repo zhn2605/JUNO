@@ -193,17 +193,17 @@ void Input() {
 
 void InitializeModels() {
     std::cout << "Initializing Models" << std::endl;
-    Model* cat = scene.CreateModel("cat", "./assets/models/tamagotchi/Kitten/kitten_01.obj");
+    Model* cat = scene.CreateModel("cat", "./assets/models/tamagotchi/Kitten/Kitten_01.obj");
     cat->SetPosition(glm::vec3(100.0f, 0.0f, 0.0f));
     cat->SetRotation(-90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     cat->SetScale(glm::vec3(.2f));
 
-    Model* frog = scene.CreateModel("frog", "./assets/models/tamagotchi/Frog/frog_01.obj");
+    Model* frog = scene.CreateModel("frog", "./assets/models/tamagotchi/Frog/Frog_01.obj");
     frog->SetPosition(glm::vec3(100.0f, 0.0f, 0.0f));
     frog->SetRotation(-90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     frog->SetScale(glm::vec3(0.1f));
 
-    Model* mouse = scene.CreateModel("mouse", "./assets/models/tamagotchi/Mouse/mouse_01.obj");
+    Model* mouse = scene.CreateModel("mouse", "./assets/models/tamagotchi/Mouse/Mouse_01.obj");
     mouse->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
     mouse->SetRotation(90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     mouse->SetScale(glm::vec3(.001f));
