@@ -301,6 +301,8 @@ int main()
 
 int main2() {
     // Globals
+    bool quit;
+
     float currentFrame = 0.0f;
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;;
@@ -325,6 +327,8 @@ int main2() {
         glm::vec3 lookDir = camera.GetLookDir();
     }
 
+    GetOpenGLVersionInfo();
+
     // Initialize random seed
     srand(time(NULL));
 
@@ -339,7 +343,26 @@ int main2() {
     scene.SetShaderProgram(graphicsShader->shaderProgram);
 
 //================== Initialize Models =======================
-    
+    Model* JONU = scene.CreateModel("JONU", "./assets/Jonu/jonu.obj"); // Jonu... the evil Juno cousin grhh garh hagr h hgrhg r
+    JONU->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    JONU->SetRotation(90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    JONU->SetScale(glm::vec3(.01f));
+
+//===================== Main Game ============================
+    // Game settings
+    camera.SetEyePosition(glm::vec3(0.0f, 1.3f, 2.3f)); //TODO: Update "player" position into an actual model position in the future
+    while (app.isActive()) {
+        // Input here TODO: Create an input manager class that handles different types of inputs
+
+        // 
+
+    }
+
+//====================== Clean Up ===========================
+    scene.CleanUpAll();
+    graphicsShader->deleteProgram();
+    app.Terminate();
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
